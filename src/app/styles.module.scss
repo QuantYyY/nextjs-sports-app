@@ -17,7 +17,7 @@
   }
 
   a:hover {
-    color: #ff9a27;
+    color: #ffb662;
   }
 }
 
@@ -40,6 +40,10 @@
   .navigation {
     display: flex;
     gap: 15px;
+
+    .active {
+      color: #ff9a27;
+    }
   }
 }
 
