@@ -1,13 +1,9 @@
-"use client";
-
 import Link from "next/link";
 import styles from "./styles.module.scss";
 import { rackets } from "@/mock";
-import { useRouter } from "next/navigation";
+import { RacketSelectionItem } from "@/components/racket-selection-item/racket-selection-item";
 
 export default function Home() {
-  const router = useRouter();
-
   return (
     <div className={styles.rackets}>
       <div className={styles.header}>
@@ -19,14 +15,7 @@ export default function Home() {
 
       <div className={styles.list}>
         {rackets.slice(0, 3).map((r) => (
-          <div
-            key={r.id}
-            className={styles.card}
-            onClick={() => router.push(`/rackets/${r.id}`)}
-          >
-            <img src={r.imageUrl} alt={r.name} />
-            <div>{r.name}</div>
-          </div>
+          <RacketSelectionItem racket={r} key={r.id} />
         ))}
       </div>
     </div>

@@ -1,43 +1,27 @@
-"use client";
-
-import Link from "next/link";
 import styles from "./styles.module.scss";
-import { usePathname } from "next/navigation";
+import { SITE_TITLE } from "@/constants/constants";
+import { Link } from "@/components/link/link";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const title = "TENNIS STORE";
-  const pathname = usePathname();
-
-  const checkIsActive = (name: string) => {
-    return pathname === name;
-  };
-
   return (
     <html>
       <body>
         <header className={styles["layout-header"]}>
-          <div className={styles.title}>{title}</div>
+          <div className={styles.title}>{SITE_TITLE}</div>
           <nav className={styles.navigation}>
-            <Link href="/" className={checkIsActive("/") ? styles.active : ""}>
-              Главная
-            </Link>
-            <Link
-              href="/rackets"
-              className={checkIsActive("/rackets") ? styles.active : ""}
-            >
-              Ракетки
-            </Link>
+            <Link href="/">Главная</Link>
+            <Link href="/rackets">Ракетки</Link>
           </nav>
         </header>
 
         <div className={styles.children}>{children}</div>
 
         <footer className={styles.footer}>
-          <div>@2026 {title}. All rights reserved.</div>
+          <div>@2026 {SITE_TITLE}. All rights reserved.</div>
         </footer>
       </body>
     </html>
