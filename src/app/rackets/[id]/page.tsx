@@ -1,36 +1,21 @@
-import { FC } from "react";
-import styles from "../styles.module.scss";
-import { rackets } from "@/mock";
-import { BackButton } from "@/components/back-button/back-button";
-
-export const generateStaticParams = () => {
-  return [{ id: "1" }, { id: "2" }, { id: "3" }];
-};
+import { Loading } from "@/components/loading/loading";
+import { RacketContainer } from "@/components/racket/racket-container";
+import { getRacketById } from "@/service/get-racket-by-id";
+import { notFound } from "next/navigation";
+import { FC, Suspense } from "react";
 
 const Page: FC<PageProps<"/rackets/[id]">> = async ({ params }) => {
   const { id } = await params;
+  const { isError, data } = await getRacketById(id);
 
-  const racket = rackets.find((el) => String(el.id) === id);
+  if (isError) return <div>Ошибка</div>;
 
-  if (!racket) return <div>Ракетка не найдена</div>;
+  if (!data) return notFound();
 
   return (
-    <div className={styles.racket}>
-      <div className={styles.description}>
-        <div className={styles.backButton}>
-          <BackButton text="Назад" />
-        </div>
-        <div className={styles.brand}>{racket.brand.name}</div>
-        <div className={styles.name}>{racket.name}</div>
-        <div className={styles.descriptionText}>{racket.description}</div>
-      </div>
-
-      <div className={styles.card}>
-        <img src={racket.imageUrl} alt={racket.name} />
-      </div>
-
-      <div className={styles.price}>{racket.price} €</div>
-    </div>
+    <>
+      <RacketContainer data={data} />
+    </>
   );
 };
 
