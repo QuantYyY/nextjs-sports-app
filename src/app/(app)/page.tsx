@@ -1,10 +1,15 @@
-import { FC, Suspense } from "react";
+import { FC } from "react";
 import Link from "next/link";
 import styles from "./styles.module.scss";
-import { Loading } from "@/components/loading/loading";
 import { RacketsList } from "@/components/rackets-list/rackets-list";
 import { getRacketsTop } from "@/service/get-rackets-top";
 import { getRackets } from "@/service/get-rackets";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "TENNIS STORE - Главная",
+  description: "Главная страница",
+};
 
 const Home: FC = async () => {
   const [

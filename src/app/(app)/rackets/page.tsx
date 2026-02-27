@@ -2,6 +2,12 @@ import { FC, Suspense } from "react";
 import styles from "./styles.module.scss";
 import { RacketsListMain } from "@/components/rackets-list-main/rackets-list-main";
 import { Loading } from "@/components/loading/loading";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "TENNIS STORE - Ракетки",
+  description: "Список ракеток",
+};
 
 const Page: FC = () => {
   return (

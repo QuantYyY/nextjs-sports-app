@@ -2,10 +2,16 @@ import { FC, Suspense } from "react";
 import styles from "../styles.module.scss";
 import { Loading } from "@/components/loading/loading";
 import { RacketsList } from "@/components/rackets-list/rackets-list";
-import { getRackets } from "@/service/get-rackets";
+import { Metadata } from "next";
+import { getRacketsTop } from "@/service/get-rackets-top";
+
+export const metadata: Metadata = {
+  title: "TENNIS STORE - Подборка лучших ракеток",
+  description: "Список лучших ракеток",
+};
 
 const Page: FC = async () => {
-  const { isError, data } = await getRackets({});
+  const { isError, data } = await getRacketsTop();
 
   return (
     <div className={styles.rackets}>

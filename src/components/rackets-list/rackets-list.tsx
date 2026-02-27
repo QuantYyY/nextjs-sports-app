@@ -18,12 +18,10 @@ export const RacketsList: FC<Props> = (props) => {
   if (!data) return notFound();
 
   return (
-    <>
-      <div className={styles.list}>
-        {data.map((r) => (
-          <RacketSelectionItem racket={r} key={r.id} />
-        ))}
-      </div>
-    </>
+    <div className={styles.list}>
+      {data.map((r) => (
+        <RacketSelectionItem racket={r} key={r.id} />
+      ))}
+    </div>
   );
 };
