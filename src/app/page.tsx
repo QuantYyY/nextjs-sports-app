@@ -1,29 +1,31 @@
 import { FC, Suspense } from "react";
 import Link from "next/link";
 import styles from "./styles.module.scss";
-import { RacketsListMain } from "@/components/rackets-list-main/rackets-list-main";
 import { Loading } from "@/components/loading/loading";
-import { RacketsListTop } from "@/components/rackets-list-top/rackets-list-top";
+import { RacketsList } from "@/components/rackets-list/rackets-list";
+import { getRacketsTop } from "@/service/get-rackets-top";
+import { getRackets } from "@/service/get-rackets";
 
-const Home: FC = () => {
+const Home: FC = async () => {
+  const [
+    { isError: isRacketsTopError, data: topRacketsData },
+    { isError: isRacketsError, data: racketsData },
+  ] = await Promise.all([getRacketsTop(), getRackets({})]);
+
   return (
     <div className={styles.rackets}>
-      <Suspense fallback={<Loading />}>
-        <div className={styles.header}>
-          <div className={styles.title}>Ракетки</div>
-          <Link href="rackets" className={styles.link}>
-            Все
-          </Link>
-        </div>
-        <RacketsListMain />
-      </Suspense>
+      <div className={styles.header}>
+        <div className={styles.title}>Ракетки</div>
+        <Link href="rackets" className={styles.link}>
+          Все
+        </Link>
+      </div>
+      <RacketsList isError={isRacketsError} data={racketsData} />
 
-      <Suspense fallback={<Loading />}>
-        <div className={styles.header}>
-          <div className={styles.title}>Топ-10 Ракеток</div>
-        </div>
-        <RacketsListTop />
-      </Suspense>
+      <div className={styles.header}>
+        <div className={styles.title}>Топ-10 Ракеток</div>
+      </div>
+      <RacketsList isError={isRacketsTopError} data={topRacketsData} />
     </div>
   );
 };

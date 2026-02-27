@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 const Loading: FC = () => {
-  return "Загрузка данных о ракетке...";
+  return "Загрузка начальной страницы...";
 };
 
 export default Loading;

@@ -3,9 +3,15 @@ import styles from "./styles.module.scss";
 import { getRacketsTop } from "@/service/get-rackets-top";
 import { notFound } from "next/navigation";
 import { RacketSelectionItem } from "../racket-selection-item/racket-selection-item";
+import { IRacket } from "@/types/racket";
 
-export const RacketsListTop: FC = async () => {
-  const { isError, data } = await getRacketsTop();
+type Props = {
+  isError: boolean;
+  data?: IRacket[];
+};
+
+export const RacketsList: FC<Props> = (props) => {
+  const { isError, data } = props;
 
   if (isError) return <div>Error</div>;
 
