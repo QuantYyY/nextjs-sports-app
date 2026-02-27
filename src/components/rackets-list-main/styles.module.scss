@@ -1,0 +1,14 @@
+.list {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(15%, 1fr));
+
+  max-width: calc(3 * 32% + 2 * 20px);
+  width: 100%;
+  margin: 0 auto;
+
+  .card {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}

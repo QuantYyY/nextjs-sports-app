@@ -1,9 +1,17 @@
+import { FC, Suspense } from "react";
 import Link from "next/link";
 import styles from "./styles.module.scss";
-import { rackets } from "@/mock";
-import { RacketSelectionItem } from "@/components/racket-selection-item/racket-selection-item";
+import { Loading } from "@/components/loading/loading";
+import { RacketsList } from "@/components/rackets-list/rackets-list";
+import { getRacketsTop } from "@/service/get-rackets-top";
+import { getRackets } from "@/service/get-rackets";
 
-export default function Home() {
+const Home: FC = async () => {
+  const [
+    { isError: isRacketsTopError, data: topRacketsData },
+    { isError: isRacketsError, data: racketsData },
+  ] = await Promise.all([getRacketsTop(), getRackets({})]);
+
   return (
     <div className={styles.rackets}>
       <div className={styles.header}>
@@ -12,12 +20,14 @@ export default function Home() {
           Все
         </Link>
       </div>
+      <RacketsList isError={isRacketsError} data={racketsData} />
 
-      <div className={styles.list}>
-        {rackets.slice(0, 3).map((r) => (
-          <RacketSelectionItem racket={r} key={r.id} />
-        ))}
+      <div className={styles.header}>
+        <div className={styles.title}>Топ-10 Ракеток</div>
       </div>
+      <RacketsList isError={isRacketsTopError} data={topRacketsData} />
     </div>
   );
-}
+};
+
+export default Home;

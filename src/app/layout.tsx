@@ -15,6 +15,7 @@ export default function RootLayout({
           <nav className={styles.navigation}>
             <Link href="/">Главная</Link>
             <Link href="/rackets">Ракетки</Link>
+            <Link href="/rackets/top">Топ Ракеток</Link>
           </nav>
         </header>
 
