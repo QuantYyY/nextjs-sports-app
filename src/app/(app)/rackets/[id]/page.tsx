@@ -26,7 +26,9 @@ const Page: FC<PageProps<"/rackets/[id]">> = async ({ params }) => {
   const { id } = await params;
   const { isError, data } = await getRacketById(id);
 
-  if (isError) return <div>Ошибка</div>;
+  if (isError) {
+    throw new Error();
+  }
 
   if (!data) return notFound();
 

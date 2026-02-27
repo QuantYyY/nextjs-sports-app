@@ -13,7 +13,9 @@ type Props = {
 export const RacketsList: FC<Props> = (props) => {
   const { isError, data } = props;
 
-  if (isError) return <div>Error</div>;
+  if (isError) {
+    throw new Error();
+  }
 
   if (!data) return notFound();
 
