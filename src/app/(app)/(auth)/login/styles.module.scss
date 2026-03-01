@@ -1,0 +1,15 @@
+.errorText {
+  color: red;
+}
+
+.formFields {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+
+  button {
+    width: fit-content;
+    padding: 4px 16px;
+  }
+}
