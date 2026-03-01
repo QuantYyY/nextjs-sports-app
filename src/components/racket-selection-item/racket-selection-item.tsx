@@ -1,9 +1,7 @@
-"use client";
-
 import { IRacket } from "@/types/racket";
 import { FC } from "react";
 import styles from "./styles.module.scss";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 type Props = {
   racket: IRacket;
@@ -11,18 +9,13 @@ type Props = {
 
 export const RacketSelectionItem: FC<Props> = ({ racket }) => {
   const { id, imageUrl, name } = racket;
-  const router = useRouter();
 
   return (
-    <>
-      <div
-        key={id}
-        className={styles.card}
-        onClick={() => router.push(`/rackets/${id}`)}
-      >
+    <Link href={`/rackets/${id}`}>
+      <div key={id} className={styles.card}>
         <img src={imageUrl} alt={name} />
         <div>{name}</div>
       </div>
-    </>
+    </Link>
   );
 };

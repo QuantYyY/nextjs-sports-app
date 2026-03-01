@@ -12,7 +12,9 @@ type Props = {
 export const RacketsListMain: FC<Props> = async ({ page, limit }) => {
   const { isError, data } = await getRackets({ page, limit });
 
-  if (isError) return <div>Error</div>;
+  if (isError) {
+    throw new Error();
+  }
 
   if (!data) return notFound();
 

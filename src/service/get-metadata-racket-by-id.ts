@@ -2,12 +2,10 @@ import { BASE_API_URL } from "@/constants/service";
 import { IRacket } from "@/types/racket";
 import { Response } from "@/types/request";
 
-export const getRacketsTop = async (): Response<IRacket[]> => {
-  const result = await fetch(`${BASE_API_URL}/top-10`, {
-    next: {
-      tags: ["getRacketsTop"],
-    },
-  });
+export const getMetadataRacketById = async (
+  racketId: string,
+): Response<IRacket> => {
+  const result = await fetch(`${BASE_API_URL}/meta/product/${racketId}`);
 
   if (result.status === 404) {
     return { isError: false, data: undefined };
@@ -17,7 +15,7 @@ export const getRacketsTop = async (): Response<IRacket[]> => {
     return { isError: true, data: undefined };
   }
 
-  const products = await result.json();
+  const { product } = await result.json();
 
-  return { isError: false, data: products };
+  return { isError: false, data: product };
 };
