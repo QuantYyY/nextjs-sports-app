@@ -1,9 +1,8 @@
-"use client";
-
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { BackButton } from "@/components/back-button/back-button";
 import { IRacket } from "@/types/racket";
+import { FavoriteButton } from "../favorite-button/favorite-button";
 
 type Props = {
   racket: IRacket;
@@ -15,6 +14,9 @@ export const Racket: FC<Props> = ({ racket }) => {
       <div className={styles.description}>
         <div className={styles.backButton}>
           <BackButton text="Назад" />
+          {racket.userData && (
+            <FavoriteButton isFavorite={racket.userData.isFavorite} />
+          )}
         </div>
         <div className={styles.brand}>{racket.brand.name}</div>
         <div className={styles.name}>{racket.name}</div>
