@@ -1,6 +1,7 @@
 .card {
   flex: 1 1 33.333%;
   box-sizing: border-box;
+  position: relative;
 
   transition:
     box-shadow 180ms ease,
@@ -18,9 +19,17 @@
     border: 1px solid #e5e5e5;
     border-radius: 5px;
 
-    &:hover {
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-      transform: translateY(-4px);
-    }
+    // &:hover {
+    //   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    //   transform: translateY(-4px);
+    // }
+  }
+
+  .favoriteIcon {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
   }
 }

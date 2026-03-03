@@ -1,6 +1,6 @@
 "use client";
 
-import { UserContext } from "@/app/providers/UserProvider";
+import { UserContext } from "@/app/providers/user";
 import { BASE_API_URL } from "@/constants/service";
 import { use, useTransition } from "react";
 
