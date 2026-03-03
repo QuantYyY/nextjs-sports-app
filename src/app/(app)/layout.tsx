@@ -2,9 +2,10 @@ import styles from "./styles.module.scss";
 import { SITE_TITLE } from "@/constants/constants";
 import { Link } from "@/components/link/link";
 import NextTopLoader from "nextjs-toploader";
-import { UserProvider } from "../providers/UserProvider";
+import { UserProvider } from "../providers/user";
 import { getUser } from "@/service/get-user";
 import { LoginSection } from "@/components/login-section/login-section";
+import { FavoriteProvider } from "../providers/favorite";
 
 export default async function Layout({
   children,
@@ -14,23 +15,25 @@ export default async function Layout({
   const { data } = await getUser();
 
   return (
-    <UserProvider user={data}>
-      <NextTopLoader />
-      <header className={styles["layout-header"]}>
-        <div className={styles.title}>{SITE_TITLE}</div>
-        <nav className={styles.navigation}>
-          <Link href="/">Главная</Link>
-          <Link href="/rackets">Ракетки</Link>
-          <Link href="/rackets/top">Топ Ракеток</Link>
-          <LoginSection />
-        </nav>
-      </header>
+    <FavoriteProvider>
+      <UserProvider user={data}>
+        <NextTopLoader />
+        <header className={styles["layout-header"]}>
+          <div className={styles.title}>{SITE_TITLE}</div>
+          <nav className={styles.navigation}>
+            <Link href="/">Главная</Link>
+            <Link href="/rackets">Ракетки</Link>
+            <Link href="/rackets/top">Топ Ракеток</Link>
+            <LoginSection />
+          </nav>
+        </header>
 
-      <div className={styles.children}>{children}</div>
+        <div className={styles.children}>{children}</div>
 
-      <footer className={styles.footer}>
-        <div>@2026 {SITE_TITLE}. All rights reserved.</div>
-      </footer>
-    </UserProvider>
+        <footer className={styles.footer}>
+          <div>@2026 {SITE_TITLE}. All rights reserved.</div>
+        </footer>
+      </UserProvider>
+    </FavoriteProvider>
   );
 }
