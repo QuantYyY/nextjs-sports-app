@@ -1,11 +1,18 @@
 import { BASE_API_URL } from "@/constants/service";
 import { IRacket } from "@/types/racket";
 import { Response } from "@/types/request";
+import { cookies } from "next/headers";
 
 export const getRacketsTop = async (): Response<IRacket[]> => {
+  const cookieStore = await cookies();
+
   const result = await fetch(`${BASE_API_URL}/top-10`, {
     next: {
       tags: ["getRacketsTop"],
+    },
+    credentials: "include",
+    headers: {
+      Cookie: cookieStore.toString(),
     },
   });
 
