@@ -32,15 +32,13 @@ export const RacketsPaginatedContainer: FC<ComponentProps> = ({ brands }) => {
   const page = parseInt(searchParams.get("page") || "") || 1;
   const brand = searchParams.get("brand") || "";
 
-  const { data, isLoading, error } = useSWR(
-    `products?page=${page}&brand=${brand}&limit=${LIMIT}`,
-    fetcher,
-    {
-      revalidateIfStale: false,
-    },
-  );
-
-  const rackets = data;
+  const {
+    data: rackets,
+    isLoading,
+    error,
+  } = useSWR(`products?page=${page}&brand=${brand}&limit=${LIMIT}`, fetcher, {
+    revalidateIfStale: false,
+  });
 
   const updatePage = (page: number) => {
     window.history.pushState({}, "", `?page=${page}&brand=${brand}`);
@@ -65,7 +63,6 @@ export const RacketsPaginatedContainer: FC<ComponentProps> = ({ brands }) => {
   return (
     <div>
       <div className={styles.brandsBlock}>
-        <div onClick={() => updateBrand("")}></div>
         {brands &&
           brands.map((brand) => (
             <p onClick={() => updateBrand(brand.name)}>{brand.name}</p>
